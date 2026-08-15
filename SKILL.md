@@ -1,0 +1,39 @@
+---
+name: comment-standards
+description: 约束 AI 生成代码注释的规范集（注释规范 + 存量注释补全工作流）。生成任意代码的注释前必须加载；写公开 API 文档注释、行内注释、// WHY: 注释、补全存量代码注释、审查注释质量时加载。触发场景：写注释、补注释、生成注释、注释规范审查、Javadoc 检查。通用原则适用任何语言，示例以 Java 为主。
+---
+
+# Comment Standards
+
+约束 AI 生成代码注释的规范集。两层内容：
+
+- **comment-standards.md**：注释规范本体 — 覆盖范围/格式/@param/@return/行内注释/禁止事项/自检清单
+- **gen-comments-workflow.md**：存量代码补注释工作流（有 spec 派生 / 无 spec 事实注释，不猜意图）
+
+## 加载矩阵
+
+| 任务类型 | 必读 |
+|---|---|
+| 生成/补全任意代码注释 | `standards/comment-standards.md` |
+| 存量代码补注释（历史代码） | `standards/gen-comments-workflow.md` + `standards/comment-standards.md` |
+| 审查注释质量 | `standards/comment-standards.md`（自检清单） |
+
+## 核心规则速查
+
+- 公开 API 必须文档注释，@param/@return 写业务含义（禁止只重复参数名）
+- getter/setter、简单方法：禁止注释
+- 行内注释解释「为什么」不解释「是什么」；复杂逻辑写 `// WHY:`
+- 禁止翻译代码式注释（`// 价格乘以数量`）
+- 注释与代码事实一致，禁止编造意图
+- 拿不准不写（宁缺毋滥）
+- 存量补注释：有 spec 走 spec，无 spec 只写事实注释
+
+## 与其他 skill 的关系
+
+- **java-code-standards**（代码规范）：引用本 skill 的注释规范（Java 代码注释规则）
+- **ai-dev-workflow**（开发流程）：约束模板引用本 skill 注释规范；gen-comments 命令对应本 skill 的存量补注释工作流
+- **database-standards**（SQL 规范）：无注释内容，无引用
+
+## 使用要求
+
+生成任何代码注释前，按「任务类型 → 加载矩阵」读取规范；生成后对照 `comment-standards.md` 自检清单逐项核对。违反强制规则即返工。
