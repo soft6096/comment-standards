@@ -95,7 +95,7 @@ PageResult<OrderVO> queryPage(Long userId, String status, int pageNum, int pageS
  * 用例：登录成功（admin）应返回 token 与完整菜单树。
  */
 @Test
-void 登录成功_admin返回token与完整菜单树() {
+void loginShouldReturnTokenAndMenuTreeForAdmin() {
 ```
 
 ✅ 正例（写明业务含义 + 约束）：
